@@ -14,7 +14,6 @@ def nulljson():
 	resp=requests.get(url).text
 	strainerobj=SoupStrainer('div',{'class':'ci-ct tnContent'})
 	soup=BeautifulSoup(resp,'html.parser',parse_only=strainerobj)
-	print(soup)
 	total=soup.find_all('div',{'class':'ci-ct tnContent'})[1].find_all('li')
 	for items in total:
 		link=items.a['href']
@@ -23,7 +22,6 @@ def nulljson():
 		secondstobj=SoupStrainer('a')
 		ssoup=BeautifulSoup(newreq,'html.parser',parse_only=secondstobj)
 		videolink=ssoup.find('a',text="Download")['href']
-		print(videolink)
 		c={items.a['href'].rsplit('/',1)[1]:videolink}
 		# c={items.a['href']:items.a['href'].rsplit('/',1)[1]}
 		epsiodelist.append(c)
