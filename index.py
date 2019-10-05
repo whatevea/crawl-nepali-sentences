@@ -7,28 +7,17 @@ def catch_all(path):
 @app.route('/')
 def nulljson():
 
-	epsiodelist=[]
+	elist=[]
 	c={}
 	gc=request.args['g']
-	url="https://www.gogoanime1.com/watch/"+gc
-	resp=requests.get(url).text
-	strainerobj=SoupStrainer('div',{'class':'ci-ct tnContent'})
-	soup=BeautifulSoup(resp,'html.parser',parse_only=strainerobj)
-	total=soup.find_all('div',{'class':'ci-ct tnContent'})[1].find_all('li')
-	for items in total:
-		link=items.a['href']
-		newreq=requests.get(link).text
-		# newbsobj=BeautifulSoup(newreq,'html.parser')
-		secondstobj=SoupStrainer('a')
-		ssoup=BeautifulSoup(newreq,'html.parser',parse_only=secondstobj)
-		videolink=ssoup.find('a',text="Download")['href']
-		c={items.a['href'].rsplit('/',1)[1]:videolink}
-		# c={items.a['href']:items.a['href'].rsplit('/',1)[1]}
-		epsiodelist.append(c)
-
-	# epsiodelist=[dict(t) for t in {tuple(sorted(d.items())) for d in epsiodelist}] #filtering duplicates due to two 
-	epsiodelist.reverse()
-	response=jsonify({"data":epsiodelist})
+	url="https://vidstreaming.io/videos/"+gc
+	data=requests.get(url).text
+	soup=bs(data,'html.parser')
+	allepisodes=soup.find('div',{'class':"video-info-left"}).find_all('li',{'class':"video-block"})
+	for episodes in allepisodes:
+		elist.append({episodes.find('div',{'class':"name"}).text:episodes.a['href']})
+	elist.reverse()
+	response=jsonify({"data":elist})
 	response.headers.add('Access-Control-Allow-Origin', '*')
 	response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
 	response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
