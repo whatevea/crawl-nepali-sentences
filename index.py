@@ -1,5 +1,5 @@
 from flask import Flask,request,jsonify
-from bs4 import BeautifulSoup,SoupStrainer
+from bs4 import BeautifulSoup as bs
 import requests
 app= Flask(__name__)
 def catch_all(path):
