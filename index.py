@@ -11,8 +11,8 @@ def nulljson():
 	iframe=html.find('<iframe')
 	iframe2=html.find('>',iframe)+1
 	notstripped=html[iframe:iframe2]
-	titlel=notstripped.find(r'&title')
-	nextamp=notstripped.find(r'&',titlel)
-	stpd=notstripped[titlel:nextamp]
-	stripped=notstripped.split(r'&type')[0]+'" allowfullscreen="true"  height="600px" width="900px" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>'
-	return {"iframe":stripped}
+	response=notstripped
+	response.headers.add('Access-Control-Allow-Origin', '*')
+	response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+	response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
+	return response
