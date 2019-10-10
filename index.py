@@ -11,7 +11,7 @@ def nulljson():
 	iframe=html.find('<iframe')
 	iframe2=html.find('>',iframe)+1
 	notstripped=html[iframe:iframe2]
-	response=jsonify("if":notstripped)
+	response=jsonify({"if":notstripped})
 	response.headers.add('Access-Control-Allow-Origin', '*')
 	response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
 	response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
