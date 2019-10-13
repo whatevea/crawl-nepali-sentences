@@ -1,5 +1,6 @@
 from flask import Flask,request,jsonify
 import requests
+from bs4 import BeautifulSoup
 app= Flask(__name__)
 def catch_all(path):
     return Response("<h1>Flask on Now</h1><p>You visited: /%s</p>" % (path), mimetype="text/html")
@@ -8,9 +9,8 @@ def nulljson():
 	q=request.args['q']
 	url="https://vidstreaming.io/"+q
 	html=requests.get(url).text
-	iframe=html.find('<iframe')
-	iframe2=html.find('>',iframe)+1
-	notstripped=html[iframe:iframe2]
+	newlink=BeautifulSoup(html,'html.parser').iframe["src"]
+	notstripped=requests.get(newlink).contents
 	response=jsonify({"if":notstripped})
 	response.headers.add('Access-Control-Allow-Origin', '*')
 	response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
