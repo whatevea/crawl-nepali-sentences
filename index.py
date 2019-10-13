@@ -10,7 +10,7 @@ def nulljson():
 	url="https://vidstreaming.io/"+q
 	html=requests.get(url).text
 	newlink=BeautifulSoup(html,'html.parser').iframe["src"]
-	notstripped=requests.get(newlink).contents
+	notstripped=requests.get("https:"+newlink).contents
 	response=jsonify({"if":notstripped})
 	response.headers.add('Access-Control-Allow-Origin', '*')
 	response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
