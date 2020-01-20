@@ -51,6 +51,8 @@ def catch_all(path):
 		iframe=html.find('<iframe')
 		iframe2=html.find('>',iframe)+1
 		notstripped=html[iframe:iframe2]
+		if notstripped=="":
+			notstripped="<h2>Episode not valid or is not yet available</h2>"
 		response=jsonify({"if":notstripped})
 		response.headers.add('Access-Control-Allow-Origin', '*')
 		response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
