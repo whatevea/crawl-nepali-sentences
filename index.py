@@ -55,8 +55,7 @@ def catch_all(path):
 		if notstripped=="":
 			notstripped="<h2>Episode not valid or is not yet available</h2>"
 		else:
-			notstripped=f'<iframe id="embed-responsive-item" src="https://www1.animevibe.tv/lite/s2/player/?anime={anonly}" marginwidth=0 marginheight=0 scrolling="no" width="640" height="500" allowfullscreen="true" frameborder="0" scrolling="no" sandbox="allow-scripts allow-same-origin"></iframe>
-'
+			notstripped=f'<iframe id="embed-responsive-item" src="https://www1.animevibe.tv/lite/s2/player/?anime={anonly}" marginwidth=0 marginheight=0 scrolling="no" width="640" height="500" allowfullscreen="true" frameborder="0" scrolling="no" sandbox="allow-scripts allow-same-origin"></iframe>'
 		response=jsonify({"if":notstripped})
 		response.headers.add('Access-Control-Allow-Origin', '*')
 		response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
