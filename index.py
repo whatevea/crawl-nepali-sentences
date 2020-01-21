@@ -13,4 +13,4 @@ def home():
 		url=request.args['url']
 		url="https://"+url.replace('^','/')
 		response=requests.get(url).text
-		retrun response
+		return response
