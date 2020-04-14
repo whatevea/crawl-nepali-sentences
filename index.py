@@ -10,7 +10,7 @@ def nulljson():
 	html=requests.get(url).text
 	openloadUrl=(BeautifulSoup(html,'html.parser').iframe['src']).replace('streaming.php','load.php').replace('//','').replace('/','^')
 	jsondata="https:crawl-nepali-sentences-git-flaskforward.sandipbamrel.now.sh/?url="+openloadUrl
-	response={"openload":jsondata}
+	response=jsonify({"openload":jsondata})
 	response.headers.add('Access-Control-Allow-Origin', '*')
 	response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
 	response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
